@@ -13,7 +13,7 @@ from models.risk_model import predict_project_risk, train_model
 # ============================================================
 
 st.set_page_config(
-    page_title="PAIMANA-X",
+    page_title="NIRMAAN",
     page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded",
