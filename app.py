@@ -14,7 +14,7 @@ from models.risk_model import predict_project_risk, train_model
 # ============================================================
 
 st.set_page_config(
-    page_title="NIRMAAN",
+    page_title="NAV-NIRMAAN",
     page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -203,7 +203,9 @@ def process_data(data):
 
         return "🟢 LOW"
 
-    data["Risk"] = data["Risk_Score"].apply(risk_level)
+    data["Risk"] = data["Risk_Score"].apply(
+        risk_level
+    )
 
     data["Potential_Overrun"] = (
         data["Cost"] * 0.15
@@ -238,7 +240,10 @@ def generate_ml_predictions(data, model):
         results.append(
             {
                 "ML_Risk": risk_name,
-                "ML_Confidence": round(probability, 1)
+                "ML_Confidence": round(
+                    probability,
+                    1
+                )
             }
         )
 
@@ -251,9 +256,15 @@ def generate_ml_predictions(data, model):
 
 df = load_data()
 india_geojson = get_geojson()
+
 model, model_accuracy = load_ml_model()
+
 df = process_data(df)
-ml_results = generate_ml_predictions(df, model)
+
+ml_results = generate_ml_predictions(
+    df,
+    model
+)
 
 df = pd.concat(
     [
@@ -268,10 +279,10 @@ df = pd.concat(
 # SIDEBAR
 # ============================================================
 
-st.sidebar.title("🏛️ NIRMAAN")
+st.sidebar.title("🏛️ NAV-NIRMAAN")
 
 st.sidebar.caption(
-    "AI Infrastructure Project Intelligence"
+    "Neural Analytics & Vision for National Infrastructure Risk Management"
 )
 
 st.sidebar.divider()
@@ -310,9 +321,12 @@ if page == "🏠 Command Center":
     st.markdown(
         """
         <div class="dashboard-header">
-            <h1>🏛️ National Infrastructure Project Command Center</h1>
+            <h1>🏛️ NAV-NIRMAAN</h1>
+
             <p>
-                SIH26103 • Web-Based Integrated Project-Monitoring Platform
+                Neural Analytics & Vision for National Infrastructure Risk Management
+                <br>
+                Web-Based Integrated Project-Monitoring Platform
             </p>
         </div>
         """,
@@ -320,9 +334,18 @@ if page == "🏠 Command Center":
     )
 
     total = len(df)
-    delayed = len(df[df["Status"] == "Delayed"])
-    high_risk = len(df[df["Risk_Score"] >= 70])
-    budget_risk = df[df["Risk_Score"] >= 70]["Cost"].sum()
+
+    delayed = len(
+        df[df["Status"] == "Delayed"]
+    )
+
+    high_risk = len(
+        df[df["Risk_Score"] >= 70]
+    )
+
+    budget_risk = df[
+        df["Risk_Score"] >= 70
+    ]["Cost"].sum()
 
     c1, c2, c3, c4 = st.columns(4)
 
@@ -348,72 +371,154 @@ if page == "🏠 Command Center":
 
     st.divider()
 
-    # --------------------------------------------------------
-    # STATE INTERACTIVE MAP
-    # --------------------------------------------------------
+    # ========================================================
+    # STATE INTERACTIVE MAP SECTION
+    # ========================================================
 
-    st.subheader("🗺️ State-Wise Infrastructure Map")
+    st.subheader(
+        "🗺️ State-Wise Infrastructure Map"
+    )
 
     st.caption(
         "States ke naam ab map ke upar bilkul saaf visible hain."
     )
 
     state_coords = {
-        "Maharashtra": {"lat": 19.7515, "lon": 75.7139},
-        "Delhi": {"lat": 28.7041, "lon": 77.1025},
-        "Gujarat": {"lat": 22.2587, "lon": 71.1924},
-        "Karnataka": {"lat": 15.3173, "lon": 75.7139},
-        "Tamil Nadu": {"lat": 11.1271, "lon": 78.6569},
-        "Uttar Pradesh": {"lat": 26.8467, "lon": 80.9462},
-        "West Bengal": {"lat": 22.9868, "lon": 87.8550},
-        "Telangana": {"lat": 18.1124, "lon": 79.0193},
-        "Kerala": {"lat": 10.8505, "lon": 76.2711},
-        "Rajasthan": {"lat": 27.0238, "lon": 74.2179},
-        "Madhya Pradesh": {"lat": 22.9734, "lon": 78.6569},
-        "Bihar": {"lat": 25.0961, "lon": 85.3131},
-        "Assam": {"lat": 26.2006, "lon": 92.9376},
-        "Punjab": {"lat": 31.1471, "lon": 75.3412},
-        "Haryana": {"lat": 29.0588, "lon": 76.0856},
+
+        "Maharashtra": {
+            "lat": 19.7515,
+            "lon": 75.7139
+        },
+
+        "Delhi": {
+            "lat": 28.7041,
+            "lon": 77.1025
+        },
+
+        "Gujarat": {
+            "lat": 22.2587,
+            "lon": 71.1924
+        },
+
+        "Karnataka": {
+            "lat": 15.3173,
+            "lon": 75.7139
+        },
+
+        "Tamil Nadu": {
+            "lat": 11.1271,
+            "lon": 78.6569
+        },
+
+        "Uttar Pradesh": {
+            "lat": 26.8467,
+            "lon": 80.9462
+        },
+
+        "West Bengal": {
+            "lat": 22.9868,
+            "lon": 87.8550
+        },
+
+        "Telangana": {
+            "lat": 18.1124,
+            "lon": 79.0193
+        },
+
+        "Kerala": {
+            "lat": 10.8505,
+            "lon": 76.2711
+        },
+
+        "Rajasthan": {
+            "lat": 27.0238,
+            "lon": 74.2179
+        },
+
+        "Madhya Pradesh": {
+            "lat": 22.9734,
+            "lon": 78.6569
+        },
+
+        "Bihar": {
+            "lat": 25.0961,
+            "lon": 85.3131
+        },
+
+        "Assam": {
+            "lat": 26.2006,
+            "lon": 92.9376
+        },
+
+        "Punjab": {
+            "lat": 31.1471,
+            "lon": 75.3412
+        },
+
+        "Haryana": {
+            "lat": 29.0588,
+            "lon": 76.0856
+        },
     }
 
     state_summary = (
         df.groupby("State")
         .agg(
-            Total_Projects=("Project", "count"),
+            Total_Projects=(
+                "Project",
+                "count"
+            ),
+
             Pending_Works=(
                 "Status",
-                lambda x: (x != "Completed").sum()
+                lambda x: (
+                    x != "Completed"
+                ).sum()
             ),
+
             Delayed_Projects=(
                 "Status",
-                lambda x: (x == "Delayed").sum()
+                lambda x: (
+                    x == "Delayed"
+                ).sum()
             ),
+
             High_Risk_Projects=(
                 "Risk_Score",
-                lambda x: (x >= 70).sum()
+                lambda x: (
+                    x >= 70
+                ).sum()
             ),
-            Avg_Progress=("Progress", "mean"),
+
+            Avg_Progress=(
+                "Progress",
+                "mean"
+            ),
         )
         .reset_index()
     )
 
-    state_summary["lat"] = state_summary["State"].map(
-        lambda s: state_coords.get(
-            s,
-            {}
-        ).get(
-            "lat",
-            20.5937
+    state_summary["lat"] = (
+        state_summary["State"].map(
+            lambda s: state_coords.get(
+                s,
+                {}
+            ).get(
+                "lat",
+                20.5937
+            )
         )
     )
 
-    state_summary["lon"] = state_summary["State"].map(
-        lambda s: state_coords.get(
-            s,
-            {}
-        ).get(
-            "lon",
-            78.9629
+    state_summary["lon"] = (
+        state_summary["State"].map(
+            lambda s: state_coords.get(
+                s,
+                {}
+            ).get(
+                "lon",
+                78.9629
+            )
         )
     )
 
@@ -434,7 +539,8 @@ if page == "🏠 Command Center":
             },
             opacity=0.5,
             labels={
-                "Pending_Works": "Pending Projects"
+                "Pending_Works":
+                    "Pending Projects"
             },
             hover_data=[
                 "Total_Projects",
@@ -448,17 +554,22 @@ if page == "🏠 Command Center":
                 lat=state_summary["lat"],
                 lon=state_summary["lon"],
                 mode="text+markers",
+
                 marker=dict(
                     size=10,
                     color="#b91c1c"
                 ),
+
                 text=state_summary["State"],
+
                 textposition="top center",
+
                 textfont=dict(
                     size=13,
                     color="#000000",
                     family="Arial, sans-serif",
                 ),
+
                 hoverinfo="none",
                 showlegend=False,
             )
@@ -479,9 +590,9 @@ if page == "🏠 Command Center":
             use_container_width=True
         )
 
-    # --------------------------------------------------------
+    # ========================================================
     # STATE SEARCH
-    # --------------------------------------------------------
+    # ========================================================
 
     state_list = [
         "All States"
@@ -554,7 +665,9 @@ if page == "🏠 Command Center":
 
     with col1:
 
-        st.subheader("🚦 Portfolio Status")
+        st.subheader(
+            "🚦 Portfolio Status"
+        )
 
         status = (
             df["Status"]
@@ -591,7 +704,9 @@ if page == "🏠 Command Center":
 
     with col2:
 
-        st.subheader("⚠️ Risk Distribution")
+        st.subheader(
+            "⚠️ Risk Distribution"
+        )
 
         risk = (
             df["Risk"]
@@ -623,7 +738,9 @@ if page == "🏠 Command Center":
 
     st.divider()
 
-    st.subheader("🚨 Priority Projects")
+    st.subheader(
+        "🚨 Priority Projects"
+    )
 
     priority = (
         df.sort_values(
@@ -656,7 +773,9 @@ if page == "🏠 Command Center":
 
 elif page == "📁 Project Explorer":
 
-    st.title("📁 Project Explorer")
+    st.title(
+        "📁 Project Explorer"
+    )
 
     st.caption(
         "Search and inspect individual infrastructure projects."
@@ -831,8 +950,10 @@ elif page == "💰 Cost Analytics":
             hover_name="Project",
             color="Status",
             labels={
-                "Progress": "Physical Progress (%)",
-                "Budget_Used": "Budget Used (%)",
+                "Progress":
+                    "Physical Progress (%)",
+                "Budget_Used":
+                    "Budget Used (%)",
             },
             title="Progress vs Budget Utilization",
         )
@@ -1073,10 +1194,25 @@ elif page == "📊 Benchmarking":
     sector_summary = (
         df.groupby("Sector")
         .agg(
-            Projects=("Project", "count"),
-            Avg_Risk=("Risk_Score", "mean"),
-            Avg_Progress=("Progress", "mean"),
-            Avg_Budget_Used=("Budget_Used", "mean"),
+            Projects=(
+                "Project",
+                "count"
+            ),
+
+            Avg_Risk=(
+                "Risk_Score",
+                "mean"
+            ),
+
+            Avg_Progress=(
+                "Progress",
+                "mean"
+            ),
+
+            Avg_Budget_Used=(
+                "Budget_Used",
+                "mean"
+            ),
         )
         .reset_index()
     )
@@ -1179,6 +1315,7 @@ elif page == "🤖 AI Assistant":
 
     question = st.text_area(
         "💬 Ask about this project",
+
         placeholder=(
             "Why is this project at risk?\n"
             "Why is this project delayed?\n"
@@ -1237,7 +1374,8 @@ elif page == "🤖 AI Assistant":
 
 **{p['Project']}** currently has a **HIGH risk score of {p['Risk_Score']}/100**.
 
-Budget utilization is **{p['Budget_Used']}%** while physical progress is only **{p['Progress']}%**.  
+Budget utilization is **{p['Budget_Used']}%** while physical progress is only **{p['Progress']}%**.
+
 Financial-progress gap: **{p['Financial_Gap']}%**
 
 ### ⚠️ Key Risks
@@ -1262,7 +1400,8 @@ Financial-progress gap: **{p['Financial_Gap']}%**
                     f"""
 ### 🟡 Moderate Risk Assessment
 
-**{p['Project']}** has a risk score of **{p['Risk_Score']}/100**.  
+**{p['Project']}** has a risk score of **{p['Risk_Score']}/100**.
+
 Budget utilization is **{p['Budget_Used']}%** against physical progress of **{p['Progress']}%**.
 
 ### Recommendation
@@ -1277,7 +1416,8 @@ Increase monitoring frequency and investigate the financial-progress gap.
                     f"""
 ### 🟢 Low Risk Assessment
 
-**{p['Project']}** currently has a risk score of **{p['Risk_Score']}/100**.  
+**{p['Project']}** currently has a risk score of **{p['Risk_Score']}/100**.
+
 The project appears to be progressing within acceptable parameters.
 
 ### Recommendation
@@ -1321,7 +1461,8 @@ Conduct a milestone-level review and identify the activities responsible for the
                     f"""
 ### ✅ No Major Delay Flag
 
-**{p['Project']}** is currently marked as **{p['Status']}**.  
+**{p['Project']}** is currently marked as **{p['Status']}**.
+
 Continue monitoring milestones to prevent future schedule slippage.
 """
                 )
@@ -1423,5 +1564,5 @@ Try asking:
     st.divider()
 
     st.caption(
-        "NIRMAAN AI Assistant • Prototype Intelligence Engine"
+        "NAV-NIRMAAN AI Assistant • Prototype Intelligence Engine"
     )
