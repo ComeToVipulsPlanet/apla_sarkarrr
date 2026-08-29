@@ -28,7 +28,9 @@ st.markdown(
     """
     <style>
 
-    /* Force App Background and Main Text Color */
+    /* ========================================================
+       MAIN APP
+       ======================================================== */
     .stApp {
         background-color: #f8fafc !important;
         color: #0f172a !important;
@@ -40,27 +42,64 @@ st.markdown(
         max-width: 1500px;
     }
 
-    /* General Text Visibility Override */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
+    /* Main content text - do NOT globally target every div */
+    .main h1, .main h2, .main h3, .main h4, .main h5, .main h6,
+    .main p, .main label {
         color: #0f172a !important;
     }
 
-    /* Sidebar Fix */
-    [data-testid="stSidebar"] {
+    /* ========================================================
+       SIDEBAR - NAV-NIRMAAN WHITE
+       ======================================================== */
+    [data-testid="stSidebar"],
+    [data-testid="stSidebar"] > div {
         background-color: #0f172a !important;
     }
 
     [data-testid="stSidebar"] * {
-        color: white !important;
+        color: #ffffff !important;
     }
 
-    /* Metric Cards Fix */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] div {
+        color: #ffffff !important;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] label,
+    [data-testid="stSidebar"] [role="radiogroup"] label * {
+        color: #ffffff !important;
+        background-color: transparent !important;
+        font-weight: 600 !important;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+        background-color: #1e293b !important;
+        border-radius: 8px !important;
+    }
+
+    [data-testid="stSidebar"] hr {
+        border-color: #475569 !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stAlert"],
+    [data-testid="stSidebar"] [data-testid="stAlert"] * {
+        color: #ffffff !important;
+    }
+
+    /* ========================================================
+       METRIC CARDS
+       ======================================================== */
     [data-testid="stMetric"] {
-        background: white !important;
+        background: #ffffff !important;
         padding: 20px !important;
         border-radius: 14px !important;
         border: 1px solid #cbd5e1 !important;
-        box-shadow: 0px 3px 12px rgba(15, 23, 42, 0.08) !important;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08) !important;
     }
 
     [data-testid="stMetricLabel"] {
@@ -73,7 +112,9 @@ st.markdown(
         font-weight: 900 !important;
     }
 
-    /* Selectbox Visibility Fix */
+    /* ========================================================
+       SELECTBOX
+       ======================================================== */
     div[data-baseweb="select"] {
         background-color: #ffffff !important;
         color: #0f172a !important;
@@ -92,12 +133,30 @@ st.markdown(
         caret-color: #0f172a !important;
     }
 
-    div[data-baseweb="select"] [data-testid="stMarkdownContainer"],
     div[data-baseweb="select"] span {
         color: #0f172a !important;
     }
 
-    /* Visible filter/selection panels */
+    label[data-testid="stWidgetLabel"] p {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+        font-size: 15px !important;
+    }
+
+    [role="listbox"],
+    [role="listbox"] *,
+    [role="option"] {
+        color: #0f172a !important;
+        background-color: #ffffff !important;
+    }
+
+    [role="option"]:hover {
+        background-color: #e2e8f0 !important;
+    }
+
+    /* ========================================================
+       SELECTION PANELS
+       ======================================================== */
     .selection-panel {
         background: #ffffff !important;
         border: 2px solid #cbd5e1 !important;
@@ -121,30 +180,15 @@ st.markdown(
         margin-bottom: 10px !important;
     }
 
-    /* Make Streamlit widget labels clearly visible */
-    label[data-testid="stWidgetLabel"] p {
-        color: #0f172a !important;
-        font-weight: 800 !important;
-        font-size: 15px !important;
-    }
-
-    /* Dropdown menu text */
-    [role="listbox"] *,
-    [role="option"] {
-        color: #0f172a !important;
-        background-color: #ffffff !important;
-    }
-
-    [role="option"]:hover {
-        background-color: #e2e8f0 !important;
-    }
-
+    /* ========================================================
+       DASHBOARD HEADER
+       ======================================================== */
     .dashboard-header {
-        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        background: linear-gradient(135deg, #0f172a, #1e3a8a) !important;
         padding: 30px 32px;
         border-radius: 18px;
         margin-bottom: 25px;
-        box-shadow: 0px 6px 20px rgba(15, 23, 42, 0.18);
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18);
     }
 
     .dashboard-header h1 {
@@ -172,11 +216,45 @@ st.markdown(
     }
 
     .section-card {
-        background: white !important;
+        background: #ffffff !important;
         padding: 20px;
         border-radius: 15px;
         border: 1px solid #e2e8f0;
-        box-shadow: 0px 3px 10px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    /* ========================================================
+       BUTTONS / INPUTS
+       ======================================================== */
+    .stButton > button {
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+    }
+
+    /* ========================================================
+       MOBILE
+       ======================================================== */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .dashboard-header {
+            padding: 22px !important;
+        }
+
+        .dashboard-header h1 {
+            font-size: 26px !important;
+        }
+
+        .dashboard-header .brand-full-name {
+            font-size: 15px !important;
+        }
+
+        .dashboard-header .platform-name {
+            font-size: 14px !important;
+        }
     }
 
     </style>
@@ -322,7 +400,20 @@ df = pd.concat(
 # SIDEBAR
 # ============================================================
 
-st.sidebar.title("🏛️ NAV-NIRMAAN")
+st.sidebar.markdown(
+    """
+    <h2 style="
+        color: #ffffff !important;
+        font-size: 26px !important;
+        font-weight: 800 !important;
+        margin: 0 0 10px 0 !important;
+        padding: 0 !important;
+    ">
+        🏛️ NAV-NIRMAAN
+    </h2>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.sidebar.caption("Neural Analytics & Vision for National Infrastructure Risk Management")
 
