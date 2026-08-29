@@ -365,15 +365,6 @@ main_navigation_options = [
     "🤖 AI Assistant",
 ]
 
-st.markdown(
-    """
-    <div style="background:#ffffff;border:2px solid #cbd5e1;border-radius:14px;padding:12px 16px;margin-bottom:10px;">
-      <div style="font-size:17px;font-weight:800;color:#0f172a;">📱 Navigation Menu</div>
-      <div style="font-size:13px;font-weight:600;color:#475569;">Use this menu on mobile to open every section.</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 mobile_page = st.selectbox(
     "Select Section",
