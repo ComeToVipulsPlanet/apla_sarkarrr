@@ -366,6 +366,7 @@ main_navigation_options = [
 ]
 
 
+
 mobile_page = st.selectbox(
     "Select Section",
     main_navigation_options,
